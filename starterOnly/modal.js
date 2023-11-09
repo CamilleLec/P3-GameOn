@@ -1,26 +1,7 @@
-function editNav() {
-    var x = document.getElementById("myTopnav");
-    if (x.className === "topnav") {
-        x.className += " responsive";
-    } else {
-        x.className = "topnav";
-    }
-}
-
 // DOM Elements
 const modalbg = document.querySelector(".bground");
 const modalBtn = document.querySelectorAll(".modal-btn");
 const formData = document.querySelectorAll(".formData");
-
-// launch modal event
-modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
-
-// launch modal form
-function launchModal() {
-    modalbg.style.display = "block";
-}
-
-
 const error = document.querySelector(".error");
 const first = document.getElementById("first");
 const last = document.getElementById("last");
@@ -31,19 +12,38 @@ const birthdate = document.getElementById("birthdate");
 const quantity = document.getElementById("quantity");
 const mdlConfirmation = document.querySelector(".mdlConfirmation");
 const btnCloseMdlConfirmation = document.getElementById("closeValidation");
+const checkboxinput = document.querySelector("input[class=checkbox-input]");
+const checkbox2 = document.querySelector("input[id=checkbox1]");
 
+// launch modal event
+modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
+
+// launch modal form
+function launchModal() {
+    modalbg.style.display = "block";
+}
+
+// menu burger
+function editNav() {
+    var x = document.getElementById("myTopnav");
+    if (x.className === "topnav") {
+        x.className += " responsive";
+    } else {
+        x.className = "topnav";
+    }
+}
+
+// Fermeture de la Modale
+closeM.addEventListener("click", () => {
+    modalbg.style.display = "none";
+});
+
+// Fermeture modale de confirmation
 btnCloseMdlConfirmation.addEventListener("click", () => {
     mdlConfirmation.style.display = "none";
 });
 
-// Fermeture de la Modale
-
-closeM.addEventListener("click", () => {
-    modalbg.style.display = "none";
-}); 
-
 // Validation formulaire
-
 form.addEventListener("submit", (e) => {
     e.preventDefault();
 
@@ -101,7 +101,6 @@ form.addEventListener("submit", (e) => {
     }
 
     const selectedCityfield = document.querySelector('input[name="location"]:checked');
-    const checkboxinput = document.querySelector("input[class=checkbox-input]");
 
     if (selectedCityfield === null) {
         const errorcheckboxinput = "Selectionnez une ville";
@@ -113,7 +112,6 @@ form.addEventListener("submit", (e) => {
     }
 
     const checkbox1 = document.querySelector('input[name="checkbox1"]:checked');
-    const checkbox2 = document.querySelector("input[id=checkbox1]");
 
     if (checkbox1 === null) {
         const termsofUseUnchecked = "veuillez accepter les conditions d'utilisation";
@@ -125,8 +123,7 @@ form.addEventListener("submit", (e) => {
     }
 
     if (ok) {
-        modalbg.style.display = "none";
-        mdlConfirmation.style.display = "block"; // Affiche la confirmation de l'inscription au tournoi
+        modalbg.style.display = "none"; // Fermer la modale
+        mdlConfirmation.style.display = "block"; // Affiche message confirmation
     }
 });
-
